@@ -25,7 +25,7 @@ app.get('/notes', (req, res) => {
 });
 
 app.get('/api/notes', (req, res) => {
-    // res.status(200).json(`${req.method} request received to get notes`);
+    // res.status(200).json(`${req.method} request received to get notes`); //I don't know what this does but I commented this out and now it all works
 
     console.info(`${req.method} request received to get notes`);
 
