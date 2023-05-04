@@ -25,10 +25,18 @@ app.get('/notes', (req, res) => {
 });
 
 app.get('/api/notes', (req, res) => {
-    res.status(200).json(`${req.method} request received to get notes`);
+    // res.status(200).json(`${req.method} request received to get notes`);
 
     console.info(`${req.method} request received to get notes`);
-});
+
+    fs.readFile('./db.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+        } else {
+            res.json(JSON.parse(data));
+        }
+    }
+)});
 
 app.post('/api/notes', (req, res) => {
     console.info(`${req.method} request received to add a note`);
@@ -42,7 +50,7 @@ app.post('/api/notes', (req, res) => {
             id: uuid(),
         };
 
-        fs.readFile('../db/notes.json', 'utf8', (err, data) => {
+        fs.readFile('./db.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {
@@ -51,7 +59,7 @@ app.post('/api/notes', (req, res) => {
             parsedNotes.push(newNote);
 
             fs.writeFile(
-                './db/notes.json',
+                './db.json',
                 JSON.stringify(parsedNotes, null, 4),
                 (writeErr) => 
                 writeErr
