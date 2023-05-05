@@ -7,7 +7,7 @@ Math.floor((1 + Math.random()) * 0x10000)
   .toString(16)
   .substring(1)
 
-const PORT = process.env.port || 3001;
+const PORT = process.env.port;
 
 const app = express();
 
